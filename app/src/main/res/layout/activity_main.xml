@@ -13,17 +13,11 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-        <TextView
-            android:id="@+id/hello_world"
-            android:text="Hello World"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"/>
-
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/hello_world"
+            app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="10dp"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager" />
 

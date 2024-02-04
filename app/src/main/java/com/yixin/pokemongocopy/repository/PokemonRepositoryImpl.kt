@@ -1,39 +1,28 @@
 package com.yixin.pokemongocopy.repository
 
-import android.util.Log
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
 import com.yixin.pokemongocopy.entity.ListingData
 import com.yixin.pokemongocopy.entity.ListingResponse
-import com.yixin.pokemongocopy.model.PokemonInfoModel
+import com.yixin.pokemongocopy.logD
 import com.yixin.pokemongocopy.model.PokemonItemModel
 import com.yixin.pokemongocopy.remote.PokemonService
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
-import javax.inject.Inject
 
-class PokemonRepositoryImpl @Inject constructor(
+class PokemonRepositoryImpl(
     private val pokemonApi: PokemonService
 ) : Repository {
 
-    override suspend fun fetchPokemonList(): ListingResponse {
+    override suspend fun fetchPokemonList(): List<PokemonItemModel> {
 
         val response = pokemonApi.fetchPokemonList()
         if (response.isSuccessful) {
-            val pokemonList = response.body()
-            pokemonList?.results?.forEach{
-                Log.d(TAG,"${it.name},${it.url}")
-            }
-            return ListingResponse(emptyList<ListingData>())
+            val pokemonList = response.body() ?: return emptyList()
+            return pokemonList.results.asSequence()
+                .map { PokemonItemModel(name = it.name, url = it.getImageUrl()) }
+                .toList()
+//            pokemonList.results.forEach{
+//                logD("${it.name},${it.url}")
+//            }
         }
-        return ListingResponse(emptyList<ListingData>())
+        return emptyList()
     }
 
-    companion object {
-        private val TAG = "PokemonRepositoryImpl"
-    }
 }
