@@ -10,7 +10,7 @@ import com.yixin.pokemongocopy.ui.MainViewModel
 import com.yixin.pokemongocopy.ui.PokemonAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
-// 要用AndroidEntryPoint注解，才能实例化有参数的ViewModel
+// 要用AndroidEntryPoint注解，才能使用Hilt实例化有参数的ViewModel
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
@@ -27,11 +27,11 @@ class MainActivity : AppCompatActivity() {
         mBinding = DataBindingUtil.setContentView(this,R.layout.activity_main)
         mViewModel.postData()
         mBinding.apply { // apply 函数
-            mBinding.recyclerView.adapter = mAdapter
+            recyclerView.adapter = mAdapter
         }
 
         mViewModel.pokemonLiveData.observe(this, Observer {
-
+            mAdapter.submitList(it)
         })
 
     }

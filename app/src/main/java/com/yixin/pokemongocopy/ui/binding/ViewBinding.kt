@@ -1,4 +1,4 @@
-package com.hi.dhl.pokemon.ui.binding
+package com.yixin.pokemongocopy.ui.binding
 
 import android.app.Activity
 import android.view.View
@@ -6,8 +6,11 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import coil.load
 import com.yixin.pokemongocopy.R
+import com.yixin.pokemongocopy.model.PokemonItemModel
+import com.yixin.pokemongocopy.ui.JProgressView
+import com.yixin.pokemongocopy.ui.details.DetailsActivity
 
-
+// 自定义databinding功能
 @BindingAdapter("bindingAvator")
 fun bindingAvator(imageView: ImageView, url: String) {
     imageView.load(url) {
@@ -32,13 +35,13 @@ fun bindingSmallImage(imageView: ImageView, url: String) {
 //    if (!isLoading) swipe.isEnabled = false
 //}
 
-//@BindingAdapter("bindProgressValue", "bindProgressMaxValue")
-//fun bindingProgressView(progress: JProgressView, progressValue: Int, maxProgressValue: Int) {
-//    progress
-//        .setProgress(progressValue.toFloat())
-//        .setMaxProgress(maxProgressValue)
-//        .startAnimal()
-//}
+@BindingAdapter("bindProgressValue", "bindProgressMaxValue")
+fun bindingProgressView(progress: JProgressView, progressValue: Int, maxProgressValue: Int) {
+    progress
+        .setProgress(progressValue.toFloat())
+        .setMaxProgress(maxProgressValue)
+        .startAnimal()
+}
 
 @BindingAdapter("bindFinish")
 fun bindingFinish(view: View, finish: Boolean) {
@@ -48,15 +51,12 @@ fun bindingFinish(view: View, finish: Boolean) {
     }
 }
 
-//@BindingAdapter("bindClick")
-//fun bindingClick(view: View, model: PokemonItemModel) {
-//    view.setOnClickListener {
-//        DetailActivity.jumpAcrtivity(
-//            view.context,
-//            model
-//        )
-//    }
-//}
+@BindingAdapter("bindClick")
+fun bindingClick(view: View, model: PokemonItemModel) {
+    view.setOnClickListener {
+        DetailsActivity.jumpAcrtivity(view.context, model)
+    }
+}
 
 //@BindingAdapter("bindAdapter", "bindData")
 //fun bindingAdapter(

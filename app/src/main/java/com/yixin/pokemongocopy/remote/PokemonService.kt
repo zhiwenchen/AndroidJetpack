@@ -5,6 +5,7 @@ import com.yixin.pokemongocopy.entity.NetWorkPokemonInfo
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface PokemonService {
@@ -14,6 +15,6 @@ interface PokemonService {
     suspend fun fetchPokemonList(@Query("limit") limit: Int = 20,
                                   @Query("offset") offset: Int = 0) : Response<ListingResponse>;
 
-    @GET("pokemon")
-    suspend fun fetchPokemonInfo(@Query("name") name: String) : Response<NetWorkPokemonInfo>;
+    @GET("pokemon/{name}")
+    suspend fun fetchPokemonInfo(@Path("name") name: String) : Response<NetWorkPokemonInfo>;
 }

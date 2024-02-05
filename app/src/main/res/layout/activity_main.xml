@@ -19,7 +19,9 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="10dp"
-            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager" />
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:spanCount="2"
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
