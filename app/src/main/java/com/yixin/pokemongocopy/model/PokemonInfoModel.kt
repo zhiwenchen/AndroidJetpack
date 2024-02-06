@@ -3,7 +3,7 @@ package com.yixin.pokemongocopy.model
 import androidx.recyclerview.widget.DiffUtil
 import kotlin.random.Random
 
-// 真实显示在视图中的Model
+// 真实显示在视图中的 pokemon Model
 /**
  *  Pokemon 详细信息
  */

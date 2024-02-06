@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeoutOrNull
 
+// 学习Flow过程中使用的示例代码
 class FlowLearn {
 
     fun simple(): List<Int> = listOf(1, 2, 3)
@@ -14,9 +15,9 @@ class FlowLearn {
     }
 
     // 序列的好处体现在链式调用的操作
-// 使用Sequence，可以延迟执行这些操作，直到需要结果时才计算
-// sequence是一个挂起函数，可以产生一个延迟计算的序列，
-// 使用yield或者yieldAll来产生序列中的元素
+    // 使用Sequence，可以延迟执行这些操作，直到需要结果时才计算
+    // sequence是一个suspend函数，可以产生一个延迟计算的序列，
+    // 使用yield或者yieldAll来产生序列中的元素
     fun simple2(): Sequence<Int> = sequence {
         for(i in 1..3) {
 

@@ -3,6 +3,8 @@ package com.yixin.pokemongocopy.repository
 import com.yixin.pokemongocopy.entity.ListingData
 import com.yixin.pokemongocopy.entity.ListingResponse
 import com.yixin.pokemongocopy.entity.PokemonInfoEntity
+import com.yixin.pokemongocopy.local.PokemonDao
+import com.yixin.pokemongocopy.local.PokemonDatabase
 import com.yixin.pokemongocopy.logD
 import com.yixin.pokemongocopy.mapper.InfoEntity2InfoModelMapper
 import com.yixin.pokemongocopy.model.PokemonInfoModel
@@ -10,7 +12,8 @@ import com.yixin.pokemongocopy.model.PokemonItemModel
 import com.yixin.pokemongocopy.remote.PokemonService
 
 class PokemonRepositoryImpl(
-    private val pokemonApi: PokemonService
+    private val pokemonApi: PokemonService,
+    private val pokemonDatebase: PokemonDatabase
 ) : Repository {
 
     override suspend fun fetchPokemonList(): List<PokemonItemModel> {
@@ -32,6 +35,9 @@ class PokemonRepositoryImpl(
 
     override suspend fun fetchPokemonInfo(name: String): PokemonInfoModel? {
         // 先从数据库中获取缓存数据
+        val pokemonDao = pokemonDatebase.pokemonDao()
+        val pokemonByName = pokemonDao.queryPokemonByName(name)
+
         // 再联网拉取数据
         val response = pokemonApi.fetchPokemonInfo(name)
         if (response.isSuccessful) {

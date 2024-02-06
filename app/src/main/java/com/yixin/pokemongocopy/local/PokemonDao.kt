@@ -1,5 +1,6 @@
 package com.yixin.pokemongocopy.local
 
+import androidx.paging.PagedList
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -17,7 +18,7 @@ interface PokemonDao {
 
     // 查询首页数据
     @Query("SELECT * FROM PokemonInfoEntity WHERE id >= :startId ORDER BY id LIMIT :limit")
-    fun getPokemonList(startId: Int, limit: Int) : List<PokemonInfoEntity>
+    fun getPokemonList(startId: Int, limit: Int) : PagedList<PokemonInfoEntity>
 
     // 删除数据库中的数据
 

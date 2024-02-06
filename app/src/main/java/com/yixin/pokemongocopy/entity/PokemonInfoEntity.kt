@@ -5,14 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.yixin.pokemongocopy.ext.getEmptyOrDefault
 
-/**
- * <pre>
- *     author: dhl
- *     date  : 2020/7/11
- *     desc  :
- * </pre>
- */
-
+// 这个是用于存放在数据库中pokemon详细数据
 @Entity
 data class PokemonInfoEntity(
     @PrimaryKey(autoGenerate = true)
@@ -23,6 +16,9 @@ data class PokemonInfoEntity(
     val experience: Int,
     val types: List<Type>,
     val stats: List<Stats>,
+    // Embedded注解用于将另一个Entity作为属性嵌入到另一个Entity，
+    // 等价于 这个表有这个类里面的字段
+    // 如果存在同名字段，可以使用prefix前缀区分
     @Embedded val sprites: Sprites
 ) {
 

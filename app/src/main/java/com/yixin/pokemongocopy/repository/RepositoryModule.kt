@@ -1,5 +1,6 @@
 package com.yixin.pokemongocopy.repository
 
+import com.yixin.pokemongocopy.local.PokemonDatabase
 import com.yixin.pokemongocopy.remote.PokemonService
 import dagger.Module
 import dagger.Provides
@@ -15,7 +16,8 @@ class RepositoryModule {
     @Provides
     fun provideTasksRepository(
         api: PokemonService,
+        db: PokemonDatabase
     ): Repository {
-        return PokemonRepositoryImpl(api)
+        return PokemonRepositoryImpl(api,db)
     }
 }

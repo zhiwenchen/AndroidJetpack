@@ -8,16 +8,19 @@ import androidx.lifecycle.Observer
 import com.yixin.pokemongocopy.databinding.ActivityMainBinding
 import com.yixin.pokemongocopy.ui.MainViewModel
 import com.yixin.pokemongocopy.ui.PokemonAdapter
+import com.yixin.pokemongocopy.ui.PokemonItemCallback
+import com.yixin.pokemongocopy.ui.PokemonListAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.internal.toImmutableList
 
 // 要用AndroidEntryPoint注解，才能使用Hilt实例化有参数的ViewModel
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mBinding: ActivityMainBinding
-    private val mAdapter = PokemonAdapter()
+//    private val mAdapter = PokemonAdapter()
+    private val mAdapter = PokemonListAdapter(PokemonItemCallback())
     // by字的用法
-    // by viewModels位于androidx.activity:activity-ktx
     private val mViewModel:MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {

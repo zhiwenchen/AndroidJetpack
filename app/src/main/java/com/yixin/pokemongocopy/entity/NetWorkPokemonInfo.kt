@@ -2,14 +2,7 @@ package com.yixin.pokemongocopy.entity
 
 import com.google.gson.annotations.SerializedName
 
-/**
- * <pre>
- *     author: dhl
- *     date  : 2020/7/11
- *     desc  :
- * </pre>
- */
-
+// 这个是网络请求返回的数据Pokemon详细数据
 data class NetWorkPokemonInfo(
     @SerializedName("name") val name: String,
     @SerializedName("height") val height: Int,

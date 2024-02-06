@@ -6,6 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.yixin.pokemongocopy.model.PokemonInfoModel
 import com.yixin.pokemongocopy.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,9 +19,11 @@ class DetailsViewModel @Inject constructor(private val repository: Repository): 
 
     fun fechPokemonInfo(name: String) {
         viewModelScope.launch {
-            val pokemonInfo = repository.fetchPokemonInfo(name)
-
-            pokemon.value = pokemonInfo
+            val pokemonInfo = viewModelScope.async (Dispatchers.IO) {// 在异步线程获取数据
+                repository.fetchPokemonInfo(name)
+            }
+            // 在主线程更新
+            pokemon.value = pokemonInfo.await()
         }
     }
 
